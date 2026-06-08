@@ -28,4 +28,22 @@ Bu projede puanlama kriterlerindeki en önemli kısım olan OOP'nin temel 4 pren
    - Otopark yönetim sınıfı, çıkış yapan aracın cinsini if-else bloklarıyla kontrol etmek yerine sadece `arac.ucret_hesapla(saat)` metodunu çağırır, doğasını sınıfların kendisi halleder.
 
 4. **Kapsülleme (Encapsulation):**
-   - Kod güvenliği için `Arac` içerisindeki plaka verisi (`__plaka`) ve `O
+   - Kod güvenliği için `Arac` içerisindeki plaka verisi (`__plaka`) ve `Otopark` içerisindeki günlük bakiye geliri (`__gunluk_gelir`) çift alt çizgi kullanılarak **gizli (private)** değişken yapılmıştır.
+   - Bu değerlere dışarıdan sadece güvenli bir şekilde `get_plaka()` ve `get_gunluk_gelir()` gibi yetkili metotlar üzerinden okuma izni verilmiştir. Dışarıdan izinsiz değiştirilmeleri engellenmiştir.
+
+---
+## Veri ve Hata Yönetimi
+- **Veri Yapısı:** Sisteme giren araçların tamamı, arama ve bulma kolaylığı açısından plaka bilgisi anahtar (key) olarak kullanılarak bir **Sözlük (Dictionary)** yapısında tutulmuştur.
+- **Kalıcı Depolama (.json):** İşlemler yapıldığında (örneğin menü 6 veya program kapatılırken menü 0 seçildiğinde) tüm veriler `otopark_verisi.json` adlı dosyaya kayıt edilir. Program ilk açıldığında otomatik olarak verileriniz bu dosyadan sisteme geri yüklenir.
+- **Hata Yönetimi (Try-Except):** Gelişmiş `try-except` blokları kullanılmıştır. Kullanıcının menüye veya plaka sistemine yapacağı hatalı girişlerde programın çökmesi (`Exception`, `ValueError`) engellenmiştir. Örneğin; olmayan plakayı sistemden çıkarmak isterseniz program size uyarı verir ancak kapanmaz.
+
+---
+## Nasıl Çalıştırılır?
+Projenin kaynak kodları, hem standart bilgisayar terminallerinde hem de bulut tabanlı defter ortamlarında çalışması için iki farklı formatta eklenmiştir.
+
+**Seçenek 1: Terminal Üzerinden Çalıştırma (main.py)**
+1. Bilgisayarınızda **Python 3.6+** sürümünün yüklü olduğundan emin olun.
+2. Terminali veya Komut İstemcisini (cmd) açıp `main.py` dosyasının bulunduğu dizine gidin.
+3. Aşağıdaki komutu çalıştırın:
+   ```bash
+   python main.py
