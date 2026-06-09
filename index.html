@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartPark Pro - Akıllı Otopark Yönetim Sistemi</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM6 16c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm12 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z" />
+            </svg>
+          </div>
+          <span class="brand-text">SmartPark Pro</span>
+        </div>
+
+        <nav class="nav-links">
+          <li class="nav-item">
+            <button class="nav-btn active" data-view="dashboard">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="9" rx="1" stroke-linecap="round"/>
+                <rect x="14" y="3" width="7" height="5" rx="1" stroke-linecap="round"/>
+                <rect x="14" y="12" width="7" height="9" rx="1" stroke-linecap="round"/>
+                <rect x="3" y="16" width="7" height="5" rx="1" stroke-linecap="round"/>
+              </svg>
+              Gösterge Paneli
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-btn" data-view="lot-view">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round"/>
+                <line x1="9" y1="3" x2="9" y2="21" stroke-linecap="round"/>
+                <line x1="15" y1="3" x2="15" y2="21" stroke-linecap="round"/>
+                <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/>
+              </svg>
+              Otopark Haritası
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-btn" data-view="reservations">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2" stroke-linecap="round"/>
+                <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round"/>
+                <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round"/>
+                <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+                <path d="M9 16l2 2 4-4" stroke-linecap="round"/>
+              </svg>
+              Rezervasyon Yap
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-btn" data-view="analytics">
+              <svg viewBox="0 0 24 24">
+                <line x1="18" y1="20" x2="18" y2="10" stroke-linecap="round"/>
+                <line x1="12" y1="20" x2="12" y2="4" stroke-linecap="round"/>
+                <line x1="6" y1="20" x2="6" y2="14" stroke-linecap="round"/>
+              </svg>
+              Analiz Raporları
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-btn" data-view="simulation-settings">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3" stroke-linecap="round"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-linecap="round"/>
+              </svg>
+              Simülasyon Ayarları
+            </button>
+          </li>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="simulation-badge" id="global-sim-badge">
+          <div class="badge-dot"></div>
+          <span class="badge-text" id="global-sim-badge-txt">Simülasyon Aktif</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      
+      <!-- Header Bar -->
+      <header class="top-header">
+        <div class="header-title-sec">
+          <h1 id="view-title">Gösterge Paneli</h1>
+        </div>
+        <div class="header-meta">
+          <div class="live-clock" id="clock-display">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>--:--:--</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Viewports -->
+      <div class="view-viewport">
+        
+        <!-- Tab 1: Dashboard View -->
+        <section class="view-panel active" id="view-dashboard">
+          <div class="dashboard-grid">
+            
+            <div class="card info-blue">
+              <div class="card-header-row">
+                <span>BOŞ YER</span>
+                <div class="card-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </div>
+              </div>
+              <div class="card-value" id="stats-available">--</div>
+              <div class="card-subtext">Toplam Kapasite: <span id="stats-capacity">72</span></div>
+            </div>
+
+            <div class="card info-red">
+              <div class="card-header-row">
+                <span>DOLU YER</span>
+                <div class="card-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z" /></svg>
+                </div>
+              </div>
+              <div class="card-value" id="stats-occupied">--</div>
+              <div class="card-subtext negative"><span id="stats-occupancy-rate">--</span> doluluk oranı</div>
+            </div>
+
+            <div class="card info-yellow">
+              <div class="card-header-row">
+                <span>REZERVASYONLAR</span>
+                <div class="card-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                </div>
+              </div>
+              <div class="card-value" id="stats-reserved">--</div>
+              <div class="card-subtext">Bugün oluşturulan rezervasyonlar</div>
+            </div>
+
+            <div class="card info-green">
+              <div class="card-header-row">
+                <span>GÜNLÜK GELİR</span>
+                <div class="card-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                </div>
+              </div>
+              <div class="card-value" id="stats-revenue">₺0.00</div>
+              <div class="card-subtext positive">Tarife: <span>₺25.00/saat</span></div>
+            </div>
+
+          </div>
+
+          <div class="dashboard-details">
+            <!-- Live Logs / Feed -->
+            <div class="card activity-feed-card">
+              <div class="activity-feed-header">
+                <h3>Sistem Günlüğü (Canlı Aktivite)</h3>
+                <button class="btn btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.78rem;" id="clear-logs-btn">Temizle</button>
+              </div>
+              <div class="log-container" id="log-feed">
+                <!-- Javascript will stream updates here -->
+              </div>
+            </div>
+
+            <!-- SVG Gauge Chart -->
+            <div class="card occupancy-gauge-card">
+              <h3>Genel Doluluk Durumu</h3>
+              <div class="gauge-svg-container">
+                <svg class="gauge-svg" viewBox="0 0 180 180">
+                  <defs>
+                    <linearGradient id="cyanPurpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#06b6d4" />
+                      <stop offset="100%" stop-color="#8b5cf6" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="gauge-track" cx="90" cy="90" r="80" />
+                  <circle class="gauge-fill" id="occupancy-gauge-fill" cx="90" cy="90" r="80" />
+                </svg>
+                <div class="gauge-text-overlay">
+                  <span class="gauge-percent" id="gauge-percent-text">--%</span>
+                  <span class="gauge-label">Doluluk</span>
+                </div>
+              </div>
+
+              <div class="gauge-summary-stats">
+                <div class="stat-item">
+                  <div class="stat-val" id="gauge-stat-ev">--/--</div>
+                  <div class="stat-lbl">Şarj Ünitesi</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-val" id="gauge-stat-hc">--/--</div>
+                  <div class="stat-lbl">Engelli Yeri</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-val" id="gauge-stat-mc">--/--</div>
+                  <div class="stat-lbl">Motosiklet</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 2: Interactive Lot View -->
+        <section class="view-panel" id="view-lot-view">
+          <div class="floor-layout-container">
+            
+            <div class="lot-visualizer-main">
+              <div class="visualizer-top-bar">
+                <div class="floor-tabs">
+                  <button class="floor-tab-btn active" data-floor="1">Zemin Kat (P1)</button>
+                  <button class="floor-tab-btn" data-floor="2">1. Kat (P2)</button>
+                  <button class="floor-tab-btn" data-floor="3">2. Kat (P3)</button>
+                </div>
+                <div class="filter-group">
+                  <label for="spot-type-filter" style="font-size: 0.8rem; color: var(--text-secondary);">Park Tipi:</label>
+                  <select id="spot-type-filter" class="filter-select">
+                    <option value="all">Tümü</option>
+                    <option value="standard">Standart</option>
+                    <option value="ev">Elektrikli Şarj</option>
+                    <option value="accessible">Engelli</option>
+                    <option value="motorcycle">Motosiklet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid-map-viewport">
+                <!-- 2D Grid Representation of slots -->
+                <div class="parking-lot-grid" id="parking-spots-grid">
+                  <!-- Generated via javascript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Spot Details Sidebar -->
+            <div class="spot-details-panel">
+              <div class="details-header">
+                <h3>
+                  <span>Detay Bilgisi</span>
+                  <span class="detail-spot-id" id="detail-spot-name">Seciniz</span>
+                </h3>
+              </div>
+              <div class="details-body" id="details-panel-body">
+                <div style="color: var(--text-muted); text-align: center; margin-top: 50px;">
+                  Detayları görüntülemek ve işlem yapmak için bir park yeri seçin.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Tab 3: Reservation View -->
+        <section class="view-panel" id="view-reservations">
+          <div class="reservation-layout">
+            
+            <!-- Reservation Form Card -->
+            <div class="form-card">
+              <h2>Yeni Rezervasyon Talebi</h2>
+              <form class="reservation-form" id="booking-form" onsubmit="return false;">
+                
+                <div class="form-field">
+                  <label for="book-driver-name">Sürücü Adı Soyadı</label>
+                  <input type="text" id="book-driver-name" class="input-ctrl" placeholder="Örn: Ahmet Yılmaz" required>
+                </div>
+
+                <div class="form-field">
+                  <label for="book-plate">Araç Plakası</label>
+                  <input type="text" id="book-plate" class="input-ctrl" placeholder="Örn: 34 ABC 123" required>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="book-vehicle-type">Araç Tipi / Park Türü</label>
+                    <select id="book-vehicle-type" class="input-ctrl">
+                      <option value="standard">Standart Binek</option>
+                      <option value="ev">Elektrikli Araç (Şarj İstasyonu)</option>
+                      <option value="accessible">Engelli Öncelikli</option>
+                      <option value="motorcycle">Motosiklet</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label for="book-duration">Park Süresi (Saat)</label>
+                    <select id="book-duration" class="input-ctrl">
+                      <option value="1">1 Saat</option>
+                      <option value="2">2 Saat</option>
+                      <option value="4">4 Saat</option>
+                      <option value="8">8 Saat</option>
+                      <option value="24">Günlük (24 Saat)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="book-floor">Kat Tercihi</label>
+                    <select id="book-floor" class="input-ctrl">
+                      <option value="any">Fark Etmez</option>
+                      <option value="1">Zemin Kat (P1)</option>
+                      <option value="2">1. Kat (P2)</option>
+                      <option value="3">2. Kat (P3)</option>
+                    </select>
+                  </div>
+                  <div class="form-field" style="justify-content: flex-end;">
+                    <!-- Auto Spot Recommender Switch -->
+                    <button class="btn btn-secondary" id="recommender-btn" type="button">
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="margin-right: 4px;">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                      </svg>
+                      En Uygun Yeri Bul
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-field" id="recommended-spot-msg-box" style="display: none;">
+                  <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.2); padding: 12px; border-radius: var(--border-radius-sm); font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    <div style="color: var(--accent-blue);">💡</div>
+                    <span id="recommended-spot-msg">Önerilen Park Yeri: <strong>Zemin Kat - A04</strong></span>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="book-spot-select">Seçilen Park Spotu</label>
+                  <select id="book-spot-select" class="input-ctrl" required>
+                    <option value="">Lütfen seçim yapın veya En Uygun Yeri seçin</option>
+                    <!-- Populated dynamically based on type/floor availability -->
+                  </select>
+                </div>
+
+                <button class="btn btn-primary" type="submit" id="submit-booking-btn">Rezervasyonu Tamamla</button>
+              </form>
+            </div>
+
+            <!-- Ticket Printout panel -->
+            <div class="ticket-container">
+              <div class="ticket-card" style="display: none;" id="ticket-card-view">
+                <div class="ticket-header">
+                  <div class="ticket-brand">SmartPark Pro Ticket</div>
+                  <div class="ticket-subtitle">Otopark Rezervasyon Giriş Kartı</div>
+                </div>
+
+                <div class="ticket-qr-section">
+                  <div class="qr-code-box">
+                    <canvas id="qr-code-canvas"></canvas>
+                  </div>
+                </div>
+
+                <div class="ticket-details">
+                  <div class="ticket-row">
+                    <span class="ticket-lbl">PLAKA</span>
+                    <span class="ticket-val" id="ticket-val-plate">34 ABC 123</span>
+                  </div>
+                  <div class="ticket-row">
+                    <span class="ticket-lbl">SÜRÜCÜ</span>
+                    <span class="ticket-val" id="ticket-val-driver">Ahmet Yılmaz</span>
+                  </div>
+                  <div class="ticket-row">
+                    <span class="ticket-lbl">SPOT ID / KAT</span>
+                    <span class="ticket-val" id="ticket-val-spot">A04 (Zemin Kat)</span>
+                  </div>
+                  <div class="ticket-row">
+                    <span class="ticket-lbl">SÜRE / TUTAR</span>
+                    <span class="ticket-val" id="ticket-val-cost">2 Saat / ₺50.00</span>
+                  </div>
+                  <div class="ticket-row">
+                    <span class="ticket-lbl">GİRİŞ KODU</span>
+                    <span class="ticket-val" id="ticket-val-code" style="letter-spacing: 1px; font-family: monospace; font-weight: 700; color: var(--accent-blue);">SPK-8921-22</span>
+                  </div>
+                </div>
+
+                <div class="ticket-status-stamp">ONAYLANDI</div>
+              </div>
+              
+              <div id="no-ticket-placeholder" style="color: var(--text-muted); text-align: center; padding: 60px 20px; border: 1px dashed var(--border-light); border-radius: var(--border-radius-md); width: 100%; max-width: 380px;">
+                <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none" style="margin-bottom: 16px; opacity: 0.5;">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/>
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                  <path d="M10 9H8"/>
+                  <path d="M16 13H8"/>
+                  <path d="M16 17H8"/>
+                </svg>
+                <p>Oluşturulmuş bir rezervasyon kartı bulunmuyor.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Formu doldurarak işlem yapabilirsiniz.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Tab 4: Analytics View -->
+        <section class="view-panel" id="view-analytics">
+          <div class="analytics-layout">
+            <div class="chart-row">
+              
+              <!-- Occupancy Trend Card -->
+              <div class="chart-card">
+                <h3>Son 24 Saatlik Doluluk Grafiği (%)</h3>
+                <div class="chart-viewport">
+                  <!-- SVG Graph -->
+                  <svg class="chart-svg" id="analytics-occupancy-chart" viewBox="0 0 500 280">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.25"/>
+                        <stop offset="100%" stop-color="var(--accent-blue)" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Gridlines, axes, curves, dots generated dynamically by JS -->
+                  </svg>
+                  <div class="chart-tooltip" id="occupancy-tooltip"></div>
+                </div>
+              </div>
+
+              <!-- Revenue Trend Card -->
+              <div class="chart-card">
+                <h3>Günlük Saatlik Gelir Dağılımı (₺)</h3>
+                <div class="chart-viewport">
+                  <!-- SVG Bar Graph -->
+                  <svg class="chart-svg" id="analytics-revenue-chart" viewBox="0 0 500 280">
+                    <!-- Bars & Labels generated dynamically by JS -->
+                  </svg>
+                  <div class="chart-tooltip" id="revenue-tooltip"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Revenue Table Card -->
+            <div class="card" style="margin-top: 10px;">
+              <h3 style="font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 20px;">Park Bölgesi Bazlı Kazanç Özeti</h3>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border-light); color: var(--text-secondary); font-weight: 600;">
+                      <th style="padding: 12px 16px;">Kat/Bölge</th>
+                      <th style="padding: 12px 16px;">Toplam Spot</th>
+                      <th style="padding: 12px 16px;">EV Şarj Kapasitesi</th>
+                      <th style="padding: 12px 16px;">Engelli Yeri</th>
+                      <th style="padding: 12px 16px;">Ortalama Doluluk (%)</th>
+                      <th style="padding: 12px 16px; text-align: right;">Toplam Ciro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--border-light);">
+                      <td style="padding: 16px; font-weight: 550;">Kat P1 (Zemin)</td>
+                      <td style="padding: 16px;" id="tbl-spots-p1">24</td>
+                      <td style="padding: 16px;">4 Spot</td>
+                      <td style="padding: 16px;">4 Spot</td>
+                      <td style="padding: 16px;" id="tbl-occ-p1">--%</td>
+                      <td style="padding: 16px; text-align: right; font-weight: 600; color: var(--accent-green);" id="tbl-rev-p1">₺0.00</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-light);">
+                      <td style="padding: 16px; font-weight: 550;">Kat P2 (1. Kat)</td>
+                      <td style="padding: 16px;" id="tbl-spots-p2">24</td>
+                      <td style="padding: 16px;">4 Spot</td>
+                      <td style="padding: 16px;">2 Spot</td>
+                      <td style="padding: 16px;" id="tbl-occ-p2">--%</td>
+                      <td style="padding: 16px; text-align: right; font-weight: 600; color: var(--accent-green);" id="tbl-rev-p2">₺0.00</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 16px; font-weight: 550;">Kat P3 (2. Kat)</td>
+                      <td style="padding: 16px;" id="tbl-spots-p3">24</td>
+                      <td style="padding: 16px;">--</td>
+                      <td style="padding: 16px;">2 Spot</td>
+                      <td style="padding: 16px;" id="tbl-occ-p3">--%</td>
+                      <td style="padding: 16px; text-align: right; font-weight: 600; color: var(--accent-green);" id="tbl-rev-p3">₺0.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 5: Simulation Settings View -->
+        <section class="view-panel" id="view-simulation-settings">
+          <div class="settings-grid">
+            
+            <div>
+              <div class="settings-card">
+                <h3>Genel Simülatör Ayarları</h3>
+                
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-name">Otomatik Simülasyon Akışı</span>
+                    <span class="setting-desc">Arka planda araçların giriş çıkış yapmasını ve ciro birikmesini sağlar.</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="sim-toggle-check" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-name">Simülasyon Güncelleme Hızı</span>
+                    <span class="setting-desc">Araçların hareket etme/zaman geçme sıklığını belirler.</span>
+                  </div>
+                  <div class="speed-buttons-group" id="sim-speed-group">
+                    <button class="speed-btn" data-speed="slow">Yavaş</button>
+                    <button class="speed-btn active" data-speed="medium">Normal</button>
+                    <button class="speed-btn" data-speed="fast">Hızlı</button>
+                  </div>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-name">Araç Giriş/Geliş Eğilimi</span>
+                    <span class="setting-desc">Otoparka yeni gelen araçların yoğunluğunu belirler.</span>
+                  </div>
+                  <div class="range-slider-container">
+                    <input type="range" class="range-input" id="sim-arrival-bias" min="10" max="90" value="50">
+                    <span class="range-val" id="sim-arrival-bias-val">50%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <h3>Manuel Tetikleyiciler</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px;">
+                  <button class="btn btn-success" id="btn-manual-arrive">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 4px;">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    Araç Girişi Simüle Et
+                  </button>
+                  <button class="btn btn-danger" id="btn-manual-depart">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 4px;">
+                      <path d="M19 13H5v-2h14v2z"/>
+                    </svg>
+                    Araç Çıkışı Simüle Et
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="settings-card" style="height: 100%; display: flex; flex-direction: column;">
+                <h3>Sistem İstatistikleri Sıfırlama</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+                  Tüm otopark düzenini sıfırlayarak boş hale getirebilir, bugüne kadar biriken ciro, rezervasyon ve log kayıtlarını silebilirsiniz. Bu işlem geri alınamaz.
+                </p>
+                <div style="margin-top: auto;">
+                  <button class="btn btn-danger" id="btn-reset-system" style="background: rgba(244, 63, 94, 0.15); border-color: var(--accent-red);">
+                    Sistemi Tamamen Sıfırla
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification Wrapper -->
+  <div class="toast-container" id="toast-wrapper"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
